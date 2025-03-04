@@ -89,6 +89,9 @@ class Skill(models.Model):
         super().full_clean()
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f"{self.name}: {self.skill_type}"
+
 
 class ProfessionType(models.Model):
     pass
