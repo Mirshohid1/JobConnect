@@ -3,6 +3,10 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
 
+def path_to_avatar(instance, filename):
+    return f"media/user_{instance.id}/avatar-{filename}"
+
+
 class CustomUser(AbstractUser):
     pass
 
