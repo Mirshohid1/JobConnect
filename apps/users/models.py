@@ -141,6 +141,9 @@ class UserSkill(models.Model):
     class Meta:
         unique_together = ('user', 'skill')
 
+    def __str__(self):
+        return f"{self.user}, skill: {self.skill}"
+
 
 class UserProfession(models.Model):
     pass
