@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
+from core.utils import clean_text_for_unique_fields
+
 from datetime import date
 
 
@@ -30,6 +32,19 @@ class CustomUser(AbstractUser):
         if (current_date.month, current_date.day) < (self.birth_date.month, self.birth_date.day):
             age -= 1
         return age
+
+    def clean(self):
+        if self.username:
+            self.username = clean_text_for_unique_fields(self.username)
+        if self.first_name:
+            self.first_name = clean_text_for_unique_fields(self.first_name)
+        if self.last_name:
+            self.last_name = clean_text_for_unique_fields(self.last_name)
+        if self.email:
+            self.email = clean_text_for_unique_fields(self.email)
+        if self.bio:
+            self.bio = clean_text_for_unique_fields(self.bio)
+        super().clean()
 
 
 class SkillType(models.Model):
