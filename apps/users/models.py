@@ -85,6 +85,10 @@ class Skill(models.Model):
         if self.description:
             self.description = clean_text_for_unique_fields(self.description)
 
+    def save(self, *args, **kwargs):
+        super().full_clean()
+        super().save(*args, **kwargs)
+
 
 class ProfessionType(models.Model):
     pass
