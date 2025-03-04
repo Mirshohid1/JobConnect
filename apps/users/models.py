@@ -146,4 +146,10 @@ class UserSkill(models.Model):
 
 
 class UserProfession(models.Model):
-    pass
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name='user_professions', verbose_name=_("User")
+    )
+    profession = models.ForeignKey(
+        Profession, on_delete=models.CASCADE, related_name='user_professions', verbose_name=_("Profession")
+    )
+    assigned_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Assigned At"))
