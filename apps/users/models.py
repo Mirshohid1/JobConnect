@@ -107,6 +107,9 @@ class ProfessionType(models.Model):
         super().full_clean()
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class Profession(models.Model):
     pass
