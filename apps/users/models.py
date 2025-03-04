@@ -112,7 +112,12 @@ class ProfessionType(models.Model):
 
 
 class Profession(models.Model):
-    pass
+    name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
+    description = models.TextField(max_length=700, null=True, blank=True, verbose_name=_('Description'))
+    profession_type = models.ForeignKey(
+        ProfessionType, on_delete=models.PROTECT, related_name='professions', verbose_name=_("Profession Type")
+    )
+    required_skills = models.ManyToManyField(Skill, related_name="professions", verbose_name=_("Required Skills"))
 
 
 class UserSkill(models.Model):
