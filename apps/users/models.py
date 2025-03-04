@@ -79,6 +79,12 @@ class Skill(models.Model):
         SkillType, on_delete=models.PROTECT, related_name='skills', verbose_name=_("Skill Type")
     )
 
+    def clean(self):
+        if self.name:
+            self.name = clean_text_for_unique_fields(self.name)
+        if self.description:
+            self.description = clean_text_for_unique_fields(self.description)
+
 
 class ProfessionType(models.Model):
     pass
