@@ -73,7 +73,11 @@ class SkillType(models.Model):
 
 
 class Skill(models.Model):
-    pass
+    name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
+    description = models.TextField(max_length=500, null=True, blank=True, verbose_name=_('Description'))
+    skill_type = models.ForeignKey(
+        SkillType, on_delete=models.PROTECT, related_name='skills', verbose_name=_("Skill Type")
+    )
 
 
 class ProfessionType(models.Model):
