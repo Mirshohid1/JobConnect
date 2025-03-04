@@ -68,6 +68,9 @@ class SkillType(models.Model):
         super().full_clean()
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class Skill(models.Model):
     pass
