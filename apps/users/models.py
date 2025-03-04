@@ -153,3 +153,6 @@ class UserProfession(models.Model):
         Profession, on_delete=models.CASCADE, related_name='user_professions', verbose_name=_("Profession")
     )
     assigned_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Assigned At"))
+
+    class Meta:
+        unique_together = ('user', 'profession')
