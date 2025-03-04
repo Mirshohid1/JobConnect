@@ -94,7 +94,8 @@ class Skill(models.Model):
 
 
 class ProfessionType(models.Model):
-    pass
+    name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
+    description = models.TextField(max_length=500, null=True, blank=True, verbose_name=_('Description'))
 
 
 class Profession(models.Model):
