@@ -156,3 +156,6 @@ class UserProfession(models.Model):
 
     class Meta:
         unique_together = ('user', 'profession')
+
+    def __str__(self):
+        return f"{self.user}, profession: {self.profession}"
