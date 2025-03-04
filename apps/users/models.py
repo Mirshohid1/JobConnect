@@ -46,6 +46,10 @@ class CustomUser(AbstractUser):
             self.bio = clean_text_for_unique_fields(self.bio)
         super().clean()
 
+    def save(self, *args, **kwargs):
+        super().full_clean()
+        super().save(*args, **kwargs)
+
 
 class SkillType(models.Model):
     pass
