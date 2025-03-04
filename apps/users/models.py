@@ -119,6 +119,12 @@ class Profession(models.Model):
     )
     required_skills = models.ManyToManyField(Skill, related_name="professions", verbose_name=_("Required Skills"))
 
+    def clean(self):
+        if self.name:
+            self.name = clean_text_for_unique_fields(self.name)
+        if self.description:
+            self.description = clean_text_for_unique_fields(self.description)
+
 
 class UserSkill(models.Model):
     pass
