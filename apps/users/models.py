@@ -138,6 +138,9 @@ class UserSkill(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name='user_skills', verbose_name=_("Skill"))
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
+    class Meta:
+        unique_together = ('user', 'skill')
+
 
 class UserProfession(models.Model):
     pass
