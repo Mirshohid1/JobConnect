@@ -58,6 +58,12 @@ class SkillType(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
     description = models.TextField(max_length=500, null=True, blank=True, verbose_name=_('Description'))
 
+    def clean(self):
+        if self.name:
+            self.name = clean_text_for_unique_fields(self.name)
+        if self.description:
+            self.description = clean_text_for_unique_fields(self.description)
+
 
 class Skill(models.Model):
     pass
