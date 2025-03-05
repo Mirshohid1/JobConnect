@@ -15,7 +15,15 @@ class UserInputSerializer(serializers.ModelSerializer):
     new_password = serializers.CharField()
     confirm_new_password = serializers.CharField()
 
-    pass
+    class Meta:
+        model = CustomUser
+        fields = (
+            'avatar',
+            'first_name', 'last_name', 'username',
+            'bio', 'birth_date',
+            'skills', 'profession',
+            'email', 'new_password', 'confirm_new_password',
+        )
 
 
 class UserSkillSerializer(serializers.ModelSerializer):
