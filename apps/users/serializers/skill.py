@@ -24,4 +24,10 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class SkillInputSerializer(serializers.ModelSerializer):
-    pass
+    skill_type = serializers.PrimaryKeyRelatedField(
+        queryset=SkillType.objects.all()
+    )
+
+    class Meta:
+        model = Skill
+        fields = ('name', 'description', 'skill_type')
