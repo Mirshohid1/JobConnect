@@ -69,7 +69,9 @@ class UserSkillSerializer(serializers.ModelSerializer):
 
 
 class UserSKillInputSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = UserSkill
+        fields = ('skill',)
 
 
 class UserProfessionSerializer(serializers.ModelSerializer):
