@@ -85,4 +85,6 @@ class UserProfessionSerializer(serializers.ModelSerializer):
 
 
 class UserProfessionInputSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = UserProfession
+        fields = ('profession',)
