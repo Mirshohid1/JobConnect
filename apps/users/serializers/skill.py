@@ -17,7 +17,10 @@ class SkillTypeInputSerializer(serializers.ModelSerializer):
 
 class SkillSerializer(serializers.ModelSerializer):
     skill_type = SkillTypeSerializer(read_only=True)
-    pass
+
+    class Meta:
+        model = Skill
+        fields = ('id', 'name', 'description', 'skill_type')
 
 
 class SkillInputSerializer(serializers.ModelSerializer):
