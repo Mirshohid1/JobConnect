@@ -19,6 +19,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'password_confirm': "Passwords don't match!"})
         return data
 
+    def create(self, validated_data):
+        validated_data.pop('password_confirm')
+        user = CustomUser.objects.create_user(**validated_data)
+        return user
+
 
 class LoginSerializer(TokenObtainPairSerializer):
     pass
