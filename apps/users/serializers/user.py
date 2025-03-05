@@ -45,6 +45,19 @@ class UserInputSerializer(serializers.ModelSerializer):
 
         return data
 
+    def update(self, instance, validated_data):
+        new_password = validated_data.pop('new_password', None)
+        validated_data.pop('confirm_new_password', None)
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if new_password:
+            instance.set_password(new_password)
+
+        instance.save()
+        return instance
+
 
 class UserSkillSerializer(serializers.ModelSerializer):
     user = UserSerializer()
