@@ -8,7 +8,13 @@ from users.models import CustomUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'role')
+        fields = (
+            'id', 'avatar',
+            'first_name', 'last_name', 'username',
+            'bio', 'birth_date',
+            'skills', 'profession',
+            'email', 'new_password', 'confirm_new_password',
+        )
 
 
 class UserInputSerializer(serializers.ModelSerializer):
