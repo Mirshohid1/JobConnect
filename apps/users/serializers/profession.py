@@ -21,7 +21,9 @@ class ProfessionSerializer(serializers.ModelSerializer):
     profession_type = ProfessionTypeSerializer(read_only=True)
     required_skills = SkillSerializer(many=True, read_only=True)
 
-    pass
+    class Meta:
+        model = Profession
+        fields = ('id', 'name', 'description', 'profession_type', 'required_skills')
 
 
 class ProfessionInputSerializer(serializers.ModelSerializer):
