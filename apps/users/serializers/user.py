@@ -31,6 +31,20 @@ class UserInputSerializer(serializers.ModelSerializer):
             'email', 'new_password', 'confirm_new_password',
         )
 
+    def validate(self, data):
+        new_password = data.get('new_password')
+        confirm_new_password = data.get('confirm_new_password')
+
+        if new_password or confirm_new_password:
+            if not new_password:
+                raise serializers.ValidationError({'new_password': 'Enter a new password.'})
+            if not confirm_new_password:
+                raise serializers.ValidationError({'confirm_new_password': 'Confirm the new password.'})
+            if new_password != confirm_new_password:
+                raise serializers.ValidationError({'confirm_new_password': "The passwords don't match."})
+
+        return data
+
 
 class UserSkillSerializer(serializers.ModelSerializer):
     user = UserSerializer()
