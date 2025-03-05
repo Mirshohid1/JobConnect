@@ -12,7 +12,9 @@ class ProfessionTypeSerializer(serializers.ModelSerializer):
 
 
 class ProfessionTypeInputSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = ProfessionType
+        fields = ('name', 'description')
 
 
 class ProfessionSerializer(serializers.ModelSerializer):
