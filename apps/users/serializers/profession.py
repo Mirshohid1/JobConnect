@@ -37,3 +37,34 @@ class ProfessionInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profession
         fields = ('name', 'description', 'profession_type', 'required_skills')
+
+    def to_internal_value(self, data):
+        profession_type_data = data.get('profession_type')
+        required_skills_data = data.get('required_skills', [])
+
+        if required_skills_data and isinstance(required_skills_data, list):
+            skill_ids = []
+            for skill in required_skills_data:
+                if isinstance(skill, dict):  # Nested object
+                    try:
+                        skill_obj = Skill.objects.get(**skill)
+                    except Skill.DoesNotExist:
+                        raise serializers.ValidationError(
+                            {"required_skills": "Some skills were not found, provide valid IDs."}
+                        )
+                    skill_ids.append(skill_obj.id)
+                else:  # ID (the usual case)
+                    skill_ids.append(skill)
+
+            data['required_skills'] = skill_ids
+
+        if isinstance(profession_type_data, dict):
+            try:
+                profession_type = ProfessionType.objects.get(**profession_type_data)
+            except ProfessionType.DoesNotExist:
+                raise serializers.ValidationError(
+                    {"profession_type": "Profession type not found, provide a valid ID."}
+                )
+            data['profession_type'] = profession_type.id
+
+        return super().to_internal_value(data)
