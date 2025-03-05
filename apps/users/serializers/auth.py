@@ -10,7 +10,9 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password_confirm = serializers.CharField(write_only=True)
 
-    pass
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'password', 'password_confirm')
 
 
 class LoginSerializer(TokenObtainPairSerializer):
