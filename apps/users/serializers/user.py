@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .skill import SkillSerializer
 
-from users.models import CustomUser
+from users.models import CustomUser, UserSkill, UserProfession
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -63,7 +63,9 @@ class UserSkillSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     skill = SkillSerializer()
 
-    pass
+    class Meta:
+        model = UserSkill
+        fields = ('id', 'user', 'skill', 'added_at')
 
 
 class UserSKillInputSerializer(serializers.ModelSerializer):
