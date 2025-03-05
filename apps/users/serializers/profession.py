@@ -6,7 +6,9 @@ from .skill import SkillSerializer
 
 
 class ProfessionTypeSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = ProfessionType
+        fields = ('id', 'name', 'description')
 
 
 class ProfessionTypeInputSerializer(serializers.ModelSerializer):
