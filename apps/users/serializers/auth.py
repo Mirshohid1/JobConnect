@@ -14,6 +14,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ('username', 'email', 'password', 'password_confirm')
 
+    def validate(self, data):
+        if data['password'] != data['password_confirm']:
+            raise serializers.ValidationError({'password_confirm': "Passwords don't match!"})
+        return data
+
 
 class LoginSerializer(TokenObtainPairSerializer):
     pass
