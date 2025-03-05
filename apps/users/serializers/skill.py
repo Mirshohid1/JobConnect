@@ -4,7 +4,9 @@ from users.models import SkillType, Skill
 
 
 class SkillTypeSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = SkillType
+        fields = ('id', 'name', 'description')
 
 
 class SkillTypeInputSerializer(serializers.ModelSerializer):
