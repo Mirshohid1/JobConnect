@@ -35,3 +35,15 @@ class LoginSerializer(TokenObtainPairSerializer):
         token['id'] = user.id
 
         return token
+
+    def validate(self, attrs: Dict[str, Any]) -> Dict[str, str]:
+        data = super().validate(attrs)
+
+        data.update({
+            'id': self.user.id,
+            'username': self.user.username,
+            'email': self.user.email,
+            'role': self.user.role
+        })
+
+        return data
