@@ -2,9 +2,13 @@ from rest_framework import serializers
 
 from .skill import SkillSerializer
 
+from users.models import CustomUser
+
 
 class UserSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'email', 'role')
 
 
 class UserInputSerializer(serializers.ModelSerializer):
