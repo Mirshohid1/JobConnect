@@ -34,4 +34,6 @@ class ProfessionInputSerializer(serializers.ModelSerializer):
         queryset=Skill.objects.all(), many=True
     )
 
-    pass
+    class Meta:
+        model = Profession
+        fields = ('name', 'description', 'profession_type', 'required_skills')
